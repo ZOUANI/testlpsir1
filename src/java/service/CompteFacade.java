@@ -29,9 +29,9 @@ public class CompteFacade extends AbstractFacade<Compte> {
         if (loadedCompte == null) {
             return -1;
         } else {
-            compte.setSolde(compte.getSolde() + montant);
-            edit(compte);
-            operationBanquaireFacade.createOperationDebit(compte, montant);
+            loadedCompte.setSolde(loadedCompte.getSolde() + montant);
+            edit(loadedCompte);
+            operationBanquaireFacade.createOperationDebit(loadedCompte, montant);
             return 1;
         }
     }
@@ -41,13 +41,13 @@ public class CompteFacade extends AbstractFacade<Compte> {
         if (loadedCompte == null) {
             return -1;
         } else {
-            Double nvSolde = compte.getSolde() - montant;
+            Double nvSolde = loadedCompte.getSolde() - montant;
             if (nvSolde < 0) {
                 return -2;
             } else {
-                compte.setSolde(nvSolde);
-                edit(compte);
-                operationBanquaireFacade.createOperationCredit(compte, montant);
+                loadedCompte.setSolde(nvSolde);
+                edit(loadedCompte);
+                operationBanquaireFacade.createOperationCredit(loadedCompte, montant);
                 return 1;
             }
 
